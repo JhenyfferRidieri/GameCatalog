@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1000285994750",
+    "project_id": "gamecatalog-63a79",
+    "storage_bucket": "gamecatalog-63a79.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000285994750:android:971dcbf10400a3d76defaf",
+        "android_client_info": {
+          "package_name": "com.example.gamecatalog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMeSnqdkcz6Qt2xGeqVW_4DY18lo0gGBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
