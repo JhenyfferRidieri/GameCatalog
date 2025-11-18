@@ -32,6 +32,7 @@ class FirebaseGameRepository : GameRepository {
         awaitClose { reg.remove() }
     }
 
+    //Adiciona ou atualiza um jogo de forma assíncrona (suspend).
     override suspend fun addGame(game: GameDTO) {
         val id = if (game.id.isBlank()) gamesCol.document().id else game.id
 
@@ -48,15 +49,18 @@ class FirebaseGameRepository : GameRepository {
         gamesCol.document(id).set(data).await()
     }
 
+    // Busca pelo ID
     override suspend fun getById(id: String): GameDTO? =
         gamesCol.document(id).get().await().let { snap ->
             if (snap.exists()) snap.toGameDTO() else null
         }
 
+    // Atualiza apenas o campo de observação (operação de Update parcial)
     override suspend fun updateObservation(id: String, observacao: String) {
         gamesCol.document(id).update("observacao", observacao).await()
     }
 
+    // Delete por ID
     override suspend fun deleteGame(id: String) {
         gamesCol.document(id).delete().await()
     }
@@ -68,7 +72,6 @@ class FirebaseGameRepository : GameRepository {
         nota = (getLong("nota") ?: 0L).toInt(),
         descricao = getString("descricao") ?: "",
         imageUri = getString("imageUri"),
-        // NOVO: leitura da observação
         observacao = getString("observacao") ?: ""
     )
 }
