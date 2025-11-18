@@ -16,20 +16,24 @@ class FakeGameRepository : GameRepository {
 
     override fun streamGames(): Flow<List<GameDTO>> = flow
 
+    // Simula a adição de um jogo
     override suspend fun addGame(game: GameDTO) {
         val id = game.id.ifBlank { UUID.randomUUID().toString() }
         flow.value = flow.value + game.copy(id = id)
     }
 
+    // Simula a busca de um jogo por ID
     override suspend fun getById(id: String): GameDTO? =
         flow.value.find { it.id == id }
 
+    // Simula a atualização de uma observação    
     override suspend fun updateObservation(id: String, observacao: String) {
         flow.value = flow.value.map { game ->
             if (game.id == id) game.copy(observacao = observacao) else game
         }
     }
 
+    // Simula a exclusão de um jogo
     override suspend fun deleteGame(id: String) {
         flow.value = flow.value.filterNot { it.id == id }
     }
